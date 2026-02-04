@@ -12,7 +12,7 @@ const cardData = [
   { id: 10, name: "Bear", emoji: "🐻" },
 ];
 
-// Variables
+// State initialization
 let flippedCards = [];
 let matchedPairs = 0;
 let revealCount = 0;
@@ -96,7 +96,7 @@ function initGame(numPairs) {
   renderCards(deck);
 }
 
-
+// Track flipped cards
 function handleCardClick(event) {
   const card = event.currentTarget;
 
@@ -121,6 +121,7 @@ function handleCardClick(event) {
   }
 }
 
+// Match check
 function checkForMatch() {
   const [card1, card2] = flippedCards;
 
