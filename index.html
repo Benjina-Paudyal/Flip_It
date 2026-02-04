@@ -6,6 +6,7 @@
     <title>Flip It</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
+
   <body>
     <div id="menu-screen" class="screen active">
       <h1>FLIP IT</h1>
@@ -18,15 +19,19 @@
     </div>
 
     <div id="game-screen" class="screen">
-        <div class="stats-bar">
-            <div class="stat"> ⏳ Time: <span id="timer">0</span></div>
-            <div class="stat"> 🎴 Reveals: <span id="revealCount">0</span></div>
-            <button id="back-button">Back to Menu</button>
+        <div id="game-container">
+      <div class="stats-bar">
+        <div class="stats-group">
+          <div class="stat">⏳ Time: <span id="timer">0</span></div>
+          <div class="stat">🎴 Reveals: <span id="revealCount">0</span></div>
         </div>
+        <button id="back-button">Back to Menu</button>
+      </div>
+      </div>
 
-        <div id="cardsGrid" class="cards-grid">
-            <!-- Cards will be generated dynamically by JS -->
-        </div>
+      <div id="cardsGrid" class="cards-grid">
+        <!-- Cards will be generated dynamically by JS -->
+      </div>
     </div>
 
     <script src="./script.js"></script>
