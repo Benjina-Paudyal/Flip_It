@@ -6,11 +6,11 @@ The goal is to match all the cards as fast as possible and with the fewest revea
 
 # 🎮 How to Play
 - Open the game
-- Chhose a difficulty level
-- CLick on cards to flip them
+- Choose a difficulty level
+- Click on cards to flip them
 - Flip two cards
     - If they match -> they stay open
-    - If they don't -> the flip back after a second
+    - If they don't -> they flip back after a second
 - Match all pairs to win
   Players can track their progress using the timer and reveal counter.
 
@@ -18,7 +18,7 @@ The goal is to match all the cards as fast as possible and with the fewest revea
 ## 🃏 Flipping Cards
 - Every card has a front side(card pattern) and back side ( emoji + name )
 - Cards flip wehn clicked
-- THe flip uses a smooth 3D animation made with CSS
+- The flip uses a smooth 3D animation made with CSS
 
 ## 🧩 Card Grid
 - Cards are shown in a grid layout
