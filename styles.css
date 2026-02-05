@@ -143,7 +143,6 @@ body {
   font-weight: bold;
 }
 
-<<<<<<< HEAD
 .grid-beginner {
   display: grid;
   gap: 15px;
@@ -157,5 +156,4 @@ body {
   grid-template-columns: repeat(4, 100px);
   margin: 0 auto;
 }
-=======
->>>>>>> 9e414d5336ae5b4b4c409cc5f68319c2ab29a18f
+
