@@ -1,3 +1,4 @@
+
 const cardData = [
   { id: 1, name: "Cat", emoji: "🐱" },
   { id: 2, name: "Dog", emoji: "🐶" },
@@ -152,3 +153,7 @@ function checkForMatch() {
     }, 1000);
   }
 }
+
+
+
+
