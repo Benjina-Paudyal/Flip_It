@@ -1,3 +1,4 @@
+
 //Data
 const cardData = [
   { id: 1, name: "Cat", emoji: "🐱" },
@@ -140,3 +141,7 @@ function checkForMatch() {
     }, 1000);
   }
 }
+
+
+
+
