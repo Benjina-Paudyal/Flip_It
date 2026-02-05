@@ -61,7 +61,10 @@ The goal is to match all the cards as fast as possible and with the fewest revea
 - script.js
 
 # ▶️ How to run the Game
-- Download or clone this repository
+- Download or clone this repository:
+- 
+    ```bash 
+  git clone https://github.com/Benjina-Paudyal/Flip_It.git 
 - Open index.html in the browser
 - Start playing
 
