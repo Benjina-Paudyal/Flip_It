@@ -1,4 +1,3 @@
-//Data
 const cardData = [
   { id: 1, name: "Cat", emoji: "🐱" },
   { id: 2, name: "Dog", emoji: "🐶" },
@@ -12,7 +11,10 @@ const cardData = [
   { id: 10, name: "Bear", emoji: "🐻" },
 ];
 
-// State initialization
+const BEGINNER_MAX_CARDS = 6;
+const BEGINNER_COLUMNS = 3;
+const ADVANCED_COLUMNS = 4;
+
 let flippedCards = [];
 let matchedPairs = 0;
 let revealCount = 0;
@@ -21,7 +23,6 @@ let timerInterval = null;
 let timerStarted = false;
 let TOTAL_PAIRS = 0;
 
-// Back to Menu button
 document.getElementById("back-button").addEventListener("click", () => {
   if (timerInterval) clearInterval(timerInterval);
   timerStarted = false;
@@ -30,73 +31,15 @@ document.getElementById("back-button").addEventListener("click", () => {
   document.getElementById("menu-screen").classList.add("active");
 });
 
-// Shuffle array: Fisher-Yates Algorithm
-function shuffle(array) {
+function shuffleCards(array) {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // let a = 1; b = 2; [a,b] = [b,a]
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
   return shuffled;
 }
 
-// Render cards in the grid
-function renderCards(cards) {
-  const grid = document.getElementById("cardsGrid");
-  grid.innerHTML = "";
-
-  if (cards.length <= 6) {
-    grid.style.gridTemplateColumns = "repeat(3, 100px)";
-  } else {
-    grid.style.gridTemplateColumns = "repeat(4, 100px)";
-  }
-
-  cards.forEach((card) => {
-    const cardElement = document.createElement("div");
-    cardElement.className = "card";
-    cardElement.dataset.cardId = card.id;
-
-    cardElement.innerHTML = `
-        <div class = "card-inner">
-            <div class="card-front">
-                <div class="pattern"> ♦ ♠ ♣ ♥ </div>
-            </div>
-
-            <div class="card-back">
-                <div class="emoji">${card.emoji}</div>
-                <div class="name">${card.name}</div>
-            </div>
-        </div>`;
-
-    cardElement.addEventListener("click", handleCardClick);
-    grid.appendChild(cardElement);
-  });
-}
-
-// Start the game
-function initGame(numPairs) {
-  TOTAL_PAIRS = numPairs;
-  matchedPairs = 0;
-  revealCount = 0;
-  seconds = 0;
-  flippedCards = [];
-  timerStarted = false;
-
-  if (timerInterval) clearInterval(timerInterval);
-
-  document.getElementById("timer").textContent = "0";
-  document.getElementById("revealCount").textContent = "0";
-
-  document.getElementById("menu-screen").classList.remove("active");
-  document.getElementById("game-screen").classList.add("active");
-
-  const selected = cardData.slice(0, numPairs);
-  const paired = [...selected, ...selected];
-  const deck = shuffle(paired);
-  renderCards(deck);
-}
-
-// Track flipped cards
 function handleCardClick(event) {
   const card = event.currentTarget;
 
@@ -121,7 +64,76 @@ function handleCardClick(event) {
   }
 }
 
-// Match check
+function renderCards(cards) {
+  const grid = document.getElementById("cardsGrid");
+  grid.innerHTML = "";
+
+  grid.classList.remove("grid-beginner", "grid-advanced");
+
+  if (cards.length <= BEGINNER_MAX_CARDS) {
+    grid.classList.add("grid-beginner");
+  } else {
+    grid.classList.add("grid-advanced");
+  }
+
+  cards.forEach((card) => {
+    const cardElement = document.createElement("div");
+    cardElement.className = "card";
+    cardElement.dataset.cardId = card.id;
+
+    const cardInner = document.createElement("div");
+    cardInner.className = "card-inner";
+
+    const cardFront = document.createElement("div");
+    cardFront.className = "card-front";
+    const pattern = document.createElement("div");
+    pattern.className = "pattern";
+    pattern.textContent = "♦ ♠ ♣ ♥";
+    cardFront.appendChild(pattern);
+
+    const cardBack = document.createElement("div");
+    cardBack.className = "card-back";
+    const emoji = document.createElement("div");
+    emoji.className = "emoji";
+    emoji.textContent = card.emoji;
+    const name = document.createElement("div");
+    name.className = "name";
+    name.textContent = card.name;
+    cardBack.appendChild(emoji);
+    cardBack.appendChild(name);
+
+    cardInner.appendChild(cardFront);
+    cardInner.appendChild(cardBack);
+    cardElement.appendChild(cardInner);
+
+    cardElement.addEventListener("click", handleCardClick);
+    grid.appendChild(cardElement);
+  });
+}
+
+function initGame(numPairs) {
+  TOTAL_PAIRS = numPairs;
+  matchedPairs = 0;
+  revealCount = 0;
+  seconds = 0;
+  flippedCards = [];
+  timerStarted = false;
+
+  if (timerInterval) clearInterval(timerInterval);
+
+  document.getElementById("timer").textContent = "0";
+  document.getElementById("revealCount").textContent = "0";
+
+  document.getElementById("menu-screen").classList.remove("active");
+  document.getElementById("game-screen").classList.add("active");
+
+  const selected = cardData.slice(0, numPairs);
+  const paired = [...selected, ...selected];
+  const deck = shuffleCards(paired);
+  renderCards(deck);
+}
+
+
 function checkForMatch() {
   const [card1, card2] = flippedCards;
 
