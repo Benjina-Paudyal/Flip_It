@@ -151,7 +151,21 @@ function checkForMatch() {
 
   if (card1.dataset.cardId === card2.dataset.cardId) {
     matchedPairs++;
+    // 
+    if (matchedPairs === totalPairs) {
+      clearInterval(timerInterval);
+
+      // The logic trigger for visual celebration
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+
+      setTimeout(() => alert("Yipppiiiiiiiiiiiii You did it"), 500);
+    }
     flippedCards = [];
+    
     if (matchedPairs === totalPairs) {
       clearInterval(timerInterval);
       setTimeout(() => alert("Yipppiiiiiiiiiiiii You did it"), 500);
