@@ -62,11 +62,13 @@ The goal is to match all the cards as fast as possible and with the fewest revea
 
 # ▶️ How to run the Game
 - Download or clone this repository:
-- 
-    ```bash 
-  git clone https://github.com/Benjina-Paudyal/Flip_It.git 
+
+```bash 
+git clone https://github.com/Benjina-Paudyal/Flip_It.git
+```
 - Open index.html in the browser
 - Start playing
+
 
 # 👥 Author
 This project was developed as part of a group assignment in the Hack Your Future web development program by Benjina and Rufaisa.
