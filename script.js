@@ -155,7 +155,7 @@ function checkForMatch() {
     if (matchedPairs === totalPairs) {
       clearInterval(timerInterval);
 
-      // The logic trigger for visual celebration
+      // The logic trigger for visual
       confetti({
         particleCount: 150,
         spread: 70,
@@ -166,10 +166,6 @@ function checkForMatch() {
     }
     flippedCards = [];
     
-    if (matchedPairs === totalPairs) {
-      clearInterval(timerInterval);
-      setTimeout(() => alert("Yipppiiiiiiiiiiiii You did it"), 500);
-    }
   } else {
     setTimeout(() => {
       card1.classList.remove("flipped");
