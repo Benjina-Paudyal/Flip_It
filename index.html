@@ -1,16 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flip It</title>
-    <link rel="stylesheet" href="./styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
 
+  <body>
+    <div id="menu-screen" class="screen active">
+      <h1>FLIP IT</h1>
+      <p>Select a difficulty level to start:</p>
+      <div class="button-group">
+        <button onclick="initGame(3)">Beginner</button>
+        <button onclick="initGame(6)">Intermediate</button>
+        <button onclick="initGame(10)">Advanced</button>
+      </div>
+    </div>
 
+    <div id="game-screen" class="screen">
+        <div id="game-container">
+      <div class="stats-bar">
+        <div class="stats-group">
+          <div class="stat">⏳ Time: <span id="timer">0</span></div>
+          <div class="stat">🎴 Reveals: <span id="revealCount">0</span></div>
+        </div>
+        <button id="back-button">Back to Menu</button>
+      </div>
+      </div>
 
+      <div id="cardsGrid" class="cards-grid">
+        <!-- Cards will be generated dynamically by JS -->
+      </div>
+    </div>
 
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>
