@@ -160,4 +160,32 @@ body {
   grid-template-columns: repeat(4, 100px);
   margin: 0 auto;
 }
+/* Dark background that covers the whole screen */
+#victory-screen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.85); /* See-through black */
+  display: none; /* Keep hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Put it on top of everything */
+}
 
+/* The white box in the middle */
+.medal-content {
+  background: white;
+  padding: 3rem;
+  border-radius: 15px;
+  text-align: center;
+  border: 4px solid #FFD700;
+  box-shadow: 0 0 30px #FFD700;
+  animation: medalPop 0.4s ease-out;
+}
+
+.medal-icon { font-size: 100px; margin: 20px 0; }
+
+@keyframes medalPop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
