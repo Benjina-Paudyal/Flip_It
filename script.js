@@ -162,7 +162,11 @@ function checkForMatch() {
         origin: { y: 0.6 }
       });
 
-      setTimeout(() => alert("Yipppiiiiiiiiiiiii You did it"), 500);
+      // --- NEW: Trigger the Medal Screen instead of alert ---
+      setTimeout(() => {
+        const modal = document.getElementById("victory-screen");
+        modal.style.display = "flex"; 
+      }, 700);
     }
     flippedCards = [];
     
