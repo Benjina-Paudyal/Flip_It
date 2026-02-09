@@ -144,22 +144,27 @@ function checkForMatch() {
 
   if (card1.dataset.cardId === card2.dataset.cardId) {
     matchedPairs++;
-    if (matchedPairs === totalPairs) {
-      clearInterval(timerInterval);
-      
-      confetti({
-        particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
 
-      setTimeout(() => {
-        const modal = document.getElementById("victory-screen");
-        modal.style.display = "flex"; 
-      }, 700);
-    }
-    flippedCards = [];
-    
+    setTimeout(() => {
+      card1.classList.add("matched");
+      card2.classList.add("matched");
+
+      if (matchedPairs === totalPairs) {
+        clearInterval(timerInterval);
+
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+
+        setTimeout(() => {
+          const modal = document.getElementById("victory-screen");
+          modal.style.display = "flex";
+        }, 700);
+      }
+      flippedCards = [];
+    }, 1000); 
   } else {
     setTimeout(() => {
       card1.classList.remove("flipped");
@@ -168,7 +173,5 @@ function checkForMatch() {
     }, 1000);
   }
 }
-
-
 
 

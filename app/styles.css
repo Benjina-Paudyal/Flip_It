@@ -1,5 +1,3 @@
-
-
 :root {
   --button-bg-color: #4caf50;
   --button-hover-color: #04750c;
@@ -160,19 +158,19 @@ body {
   grid-template-columns: repeat(4, 100px);
   margin: 0 auto;
 }
-/* Dark background that covers the whole screen */
+
+
 #victory-screen {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.85); /* See-through black */
-  display: none; /* Keep hidden by default */
+  background: rgba(0, 0, 0, 0.85); 
+  display: none; 
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* Put it on top of everything */
+  z-index: 9999; 
 }
 
-/* The white box in the middle */
 .medal-content {
   background: white;
   padding: 3rem;
@@ -189,3 +187,11 @@ body {
   0% { transform: scale(0.5); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
+
+.card.matched {
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  opacity: 0;
+  transform: scale(0.5); 
+  pointer-events: none;
+}
+
