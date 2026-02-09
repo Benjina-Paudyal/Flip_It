@@ -144,18 +144,15 @@ function checkForMatch() {
 
   if (card1.dataset.cardId === card2.dataset.cardId) {
     matchedPairs++;
-    // 
     if (matchedPairs === totalPairs) {
       clearInterval(timerInterval);
-
-      // The logic trigger for visual
+      
       confetti({
         particleCount: 150,
         spread: 70,
         origin: { y: 0.6 }
       });
 
-      // --- NEW: Trigger the Medal Screen instead of alert ---
       setTimeout(() => {
         const modal = document.getElementById("victory-screen");
         modal.style.display = "flex"; 
