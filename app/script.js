@@ -1,21 +1,8 @@
-
-const cardData = [
-  { id: 1, name: "Cat", emoji: "🐱" },
-  { id: 2, name: "Dog", emoji: "🐶" },
-  { id: 3, name: "Fox", emoji: "🦊" },
-  { id: 4, name: "Lion", emoji: "🦁" },
-  { id: 5, name: "Panda", emoji: "🐼" },
-  { id: 6, name: "Koala", emoji: "🐨" },
-  { id: 7, name: "Rabbit", emoji: "🐰" },
-  { id: 8, name: "Tiger", emoji: "🐯" },
-  { id: 9, name: "Mouse", emoji: "🐭" },
-  { id: 10, name: "Bear", emoji: "🐻" },
-];
-
 const BEGINNER_MAX_CARDS = 6;
 const BEGINNER_COLUMNS = 3;
 const ADVANCED_COLUMNS = 4;
 
+let cardData = [];
 let flippedCards = [];
 let matchedPairs = 0;
 let revealCount = 0;
@@ -24,6 +11,11 @@ let timerInterval = null;
 let timerStarted = false;
 let totalPairs = 0;
 
+async function loadCards() {
+  const response = await fetch("/cards");
+  cardData = await response.json();
+}
+
 document.getElementById("back-button").addEventListener("click", () => {
   if (timerInterval) clearInterval(timerInterval);
   timerStarted = false;
@@ -31,6 +23,7 @@ document.getElementById("back-button").addEventListener("click", () => {
   document.getElementById("game-screen").classList.remove("active");
   document.getElementById("menu-screen").classList.add("active");
 });
+
 
 function shuffleCards(array) {
   const shuffled = [...array];
@@ -66,7 +59,6 @@ function handleCardClick(event) {
   }
 }
 
-
 function createCardFront() {
   const cardFront = document.createElement("div");
   cardFront.className = "card-front";
@@ -78,7 +70,6 @@ function createCardFront() {
   cardFront.appendChild(pattern);
   return cardFront;
 }
-
 
 function createCardBack(card) {
   const cardBack = document.createElement("div");
@@ -123,7 +114,9 @@ function renderCards(cards) {
 }
 
 
-function initGame(numPairs) {
+async function initGame(numPairs) {
+  await loadCards();
+
   totalPairs = numPairs;
   matchedPairs = 0;
   revealCount = 0;
