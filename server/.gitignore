@@ -1,5 +1,0 @@
-# Ignore packages installed by npm/node in any dir
-node_modules
-
-# Ignore hidden macOS files
-.DS_Store
