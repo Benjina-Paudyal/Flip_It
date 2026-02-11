@@ -213,40 +213,6 @@ body {
   pointer-events: none;
 }
 
-
-@media (max-width: 500px) {
-  .card {
-    width: 70px;
-    height: 84px; 
-  }
-
-  .emoji { font-size: 2.5rem; }
-  .name { font-size: 0.8rem; }
- 
-  .stats-bar {
-    max-width: 90%;
-    padding: 10px 15px;
-  }
-  .stats-bar .stat { font-size: 0.85rem; }
-
-  #back-button {
-    font-size: 0.8rem;
-    padding: 5px 10px;
-  }
-
-  .medal-content {
-    padding: 2rem;
-    border-width: 3px;
-  }
-  .medal-icon { font-size: 60px; margin: 10px 0; }
-
-  .grid-beginner,
-  .grid-advanced {
-    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-    max-width: 90%;
-  }
-}
-
 .menu-card {
   background: white;
   padding: 50px 40px;
@@ -298,3 +264,37 @@ body {
   transform: translateY(0);
 }
 
+
+
+@media (max-width: 500px) {
+  .card {
+    width: 70px;
+    height: 84px; 
+  }
+
+  .emoji { font-size: 2.5rem; }
+  .name { font-size: 0.8rem; }
+ 
+  .stats-bar {
+    max-width: 90%;
+    padding: 10px 15px;
+  }
+  .stats-bar .stat { font-size: 0.85rem; }
+
+  #back-button {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+
+  .medal-content {
+    padding: 2rem;
+    border-width: 3px;
+  }
+  .medal-icon { font-size: 60px; margin: 10px 0; }
+
+  .grid-beginner,
+  .grid-advanced {
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    max-width: 90%;
+  }
+}
