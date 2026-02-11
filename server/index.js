@@ -1,10 +1,19 @@
 import express from "express";
 import knex from "knex";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 app.use(express.json());
 
-app.use(express.static("../app"));
+// convert the module URL into a normal file path (ES modules)
+const __filename = fileURLToPath(import.meta.url);
+
+// get the directory of the server folder
+const __dirname = path.dirname(__filename);
+
+// serve frontend files
+app.use(express.static(path.join(__dirname, "../app")));
 
 // Set port
 const PORT = process.env.PORT || 3000;
