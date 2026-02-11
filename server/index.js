@@ -1,30 +1,33 @@
-
 import express from "express";
 import knex from "knex";
 
-
 const app = express();
-app.use(express.json()); 
+app.use(express.json());
 
 app.use(express.static("../app"));
 
+// Set port
+const PORT = process.env.PORT || 3000;
 
+// Setup database
 const db = knex({
   client: "sqlite3",
   connection: { filename: "./database.db" },
-  useNullAsDefault: true, 
+  useNullAsDefault: true,
 });
 
-
-app.get("/cards",async (request, response) =>{
+// Routes
+app.get("/cards", async (request, response) => {
   try {
     const cards = await db("cards").select("*");
     response.json(cards);
   } catch (error) {
-    response.status(500).json({ error: "Could not load cards"});
+    response.status(500).json({ error: "Could not load cards" });
   }
 });
 
-app.listen(3000, () => {
-  console.log("App running on http://localhost:3000. Type Ctrl+C to stop.");
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`App running on http://localhost:${PORT}`);
 });

@@ -43,6 +43,9 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
+  max-height: 80vh; 
+  overflow-y: auto; 
+  padding-bottom: 20px;
 }
 
 .stats-bar {
@@ -88,6 +91,7 @@ body {
   display: grid;
   gap: 15px;
   max-width: 445px; /* matched with stats-bar */
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -155,7 +159,8 @@ body {
 .grid-advanced {
   display: grid;
   gap: 15px;
-  grid-template-columns: repeat(4, 100px);
+  /* grid-template-columns: repeat(4, 100px); */
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   margin: 0 auto;
 }
 
@@ -195,3 +200,37 @@ body {
   pointer-events: none;
 }
 
+
+
+@media (max-width: 500px) {
+  .card {
+    width: 70px;
+    height: 84px; 
+  }
+
+  .emoji { font-size: 2.5rem; }
+  .name { font-size: 0.8rem; }
+ 
+  .stats-bar {
+    max-width: 90%;
+    padding: 10px 15px;
+  }
+  .stats-bar .stat { font-size: 0.85rem; }
+
+  #back-button {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+
+  .medal-content {
+    padding: 2rem;
+    border-width: 3px;
+  }
+  .medal-icon { font-size: 60px; margin: 10px 0; }
+
+  .grid-beginner,
+  .grid-advanced {
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    max-width: 90%;
+  }
+}
