@@ -21,7 +21,6 @@ const gameScreen = document.getElementById("game-screen");
 const victoryScreen = document.getElementById("victory-screen");
 const backButton = document.getElementById("back-button");
 
-
 async function loadCards() {
   try {
     const response = await fetch("/api/cards");
@@ -33,7 +32,6 @@ async function loadCards() {
   }
 }
 
-
 backButton.addEventListener("click", () => {
   if (timerInterval) clearInterval(timerInterval);
   timerStarted = false;
@@ -41,7 +39,6 @@ backButton.addEventListener("click", () => {
   gameScreen.classList.remove("active");
   menuScreen.classList.add("active");
 });
-
 
 function shuffleCards(array) {
   const shuffled = [...array];
@@ -51,7 +48,6 @@ function shuffleCards(array) {
   }
   return shuffled;
 }
-
 
 function handleCardClick(event) {
   const card = event.currentTarget;
@@ -77,7 +73,6 @@ function handleCardClick(event) {
   }
 }
 
-
 function createCardFront() {
   const cardFront = document.createElement("div");
   cardFront.className = "card-front";
@@ -89,7 +84,6 @@ function createCardFront() {
   cardFront.appendChild(pattern);
   return cardFront;
 }
-
 
 function createCardBack(card) {
   const cardBack = document.createElement("div");
@@ -108,7 +102,6 @@ function createCardBack(card) {
 
   return cardBack;
 }
-
 
 function renderCards(cards) {
   const grid = document.getElementById("cardsGrid");
@@ -136,7 +129,6 @@ function renderCards(cards) {
   });
 }
 
-
 async function initGame(numPairs) {
   await loadCards();
 
@@ -160,7 +152,6 @@ async function initGame(numPairs) {
   const deck = shuffleCards(paired);
   renderCards(deck);
 }
-
 
 function checkForMatch() {
   const [card1, card2] = flippedCards;

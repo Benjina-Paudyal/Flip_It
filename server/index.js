@@ -7,15 +7,15 @@ const app = express();
 app.use(express.json());
 
 // Build __dirname in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url); // C:\project\server\index.js
+const __dirname = path.dirname(__filename); // C:\project\server
 
 // Serve static frontend
 const clientPath = path.join(__dirname, "../app");
 app.use(express.static(clientPath));
 
 // Set port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // process.env.PORT: for hosting services, 3000: fallback for running locally
 
 // Setup database
 const db = knex({
