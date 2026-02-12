@@ -265,7 +265,17 @@ body {
   transform: translateY(0);
 }
 
+
 @media (max-width: 500px) {
+  .cards-grid {
+    padding: 0 10px; 
+  }
+
+  .grid-advanced, 
+  .grid-beginner {
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  }
   .card {
     width: 70px;
     height: 84px;
@@ -299,10 +309,5 @@ body {
     font-size: 60px;
     margin: 10px 0;
   }
-
-  .grid-beginner,
-  .grid-advanced {
-    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-    max-width: 90%;
-  }
+ 
 }
