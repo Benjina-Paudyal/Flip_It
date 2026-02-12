@@ -24,7 +24,7 @@ const backButton = document.getElementById("back-button");
 
 async function loadCards() {
   try {
-    const response = await fetch("/cards");
+    const response = await fetch("/api/cards");
     if (!response.ok) throw new Error("Network response was not OK");
     cardData = await response.json();
   } catch (error) {
