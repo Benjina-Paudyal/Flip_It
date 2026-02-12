@@ -1,21 +1,11 @@
-
-const cardData = [
-  { id: 1, name: "Cat", emoji: "🐱" },
-  { id: 2, name: "Dog", emoji: "🐶" },
-  { id: 3, name: "Fox", emoji: "🦊" },
-  { id: 4, name: "Lion", emoji: "🦁" },
-  { id: 5, name: "Panda", emoji: "🐼" },
-  { id: 6, name: "Koala", emoji: "🐨" },
-  { id: 7, name: "Rabbit", emoji: "🐰" },
-  { id: 8, name: "Tiger", emoji: "🐯" },
-  { id: 9, name: "Mouse", emoji: "🐭" },
-  { id: 10, name: "Bear", emoji: "🐻" },
-];
-
 const BEGINNER_MAX_CARDS = 6;
 const BEGINNER_COLUMNS = 3;
 const ADVANCED_COLUMNS = 4;
+const CARD_SYMBOLS = "♦ ♠ ♣ ♥";
+const TIMER_ID = "timer";
+const REVEAL_COUNT_ID = "revealCount";
 
+let cardData = [];
 let flippedCards = [];
 let matchedPairs = 0;
 let revealCount = 0;
@@ -24,13 +14,34 @@ let timerInterval = null;
 let timerStarted = false;
 let totalPairs = 0;
 
-document.getElementById("back-button").addEventListener("click", () => {
+const timerEl = document.getElementById("timer");
+const revealCountEl = document.getElementById("revealCount");
+const menuScreen = document.getElementById("menu-screen");
+const gameScreen = document.getElementById("game-screen");
+const victoryScreen = document.getElementById("victory-screen");
+const backButton = document.getElementById("back-button");
+
+
+async function loadCards() {
+  try {
+    const response = await fetch("/api/cards");
+    if (!response.ok) throw new Error("Network response was not OK");
+    cardData = await response.json();
+  } catch (error) {
+    console.error("Failed to load cards:", error);
+    alert("Failed to load cards. Please try again later.");
+  }
+}
+
+
+backButton.addEventListener("click", () => {
   if (timerInterval) clearInterval(timerInterval);
   timerStarted = false;
 
-  document.getElementById("game-screen").classList.remove("active");
-  document.getElementById("menu-screen").classList.add("active");
+  gameScreen.classList.remove("active");
+  menuScreen.classList.add("active");
 });
+
 
 function shuffleCards(array) {
   const shuffled = [...array];
@@ -51,7 +62,7 @@ function handleCardClick(event) {
     timerStarted = true;
     timerInterval = setInterval(() => {
       seconds++;
-      document.getElementById("timer").textContent = seconds;
+      timerEl.textContent = seconds;
     }, 1000);
   }
 
@@ -59,7 +70,7 @@ function handleCardClick(event) {
   flippedCards.push(card);
 
   revealCount++;
-  document.getElementById("revealCount").textContent = revealCount;
+  revealCountEl.textContent = revealCount;
 
   if (flippedCards.length === 2) {
     checkForMatch();
@@ -73,7 +84,7 @@ function createCardFront() {
 
   const pattern = document.createElement("div");
   pattern.className = "pattern";
-  pattern.textContent = "♦ ♠ ♣ ♥";
+  pattern.textContent = CARD_SYMBOLS;
 
   cardFront.appendChild(pattern);
   return cardFront;
@@ -98,12 +109,15 @@ function createCardBack(card) {
   return cardBack;
 }
 
+
 function renderCards(cards) {
   const grid = document.getElementById("cardsGrid");
   grid.innerHTML = "";
   grid.classList.remove("grid-beginner", "grid-advanced");
 
-  grid.classList.add(cards.length <= BEGINNER_MAX_CARDS ? "grid-beginner" : "grid-advanced");
+  grid.classList.add(
+    cards.length <= BEGINNER_MAX_CARDS ? "grid-beginner" : "grid-advanced",
+  );
 
   cards.forEach((card) => {
     const cardElement = document.createElement("div");
@@ -123,7 +137,9 @@ function renderCards(cards) {
 }
 
 
-function initGame(numPairs) {
+async function initGame(numPairs) {
+  await loadCards();
+
   totalPairs = numPairs;
   matchedPairs = 0;
   revealCount = 0;
@@ -133,11 +149,11 @@ function initGame(numPairs) {
 
   if (timerInterval) clearInterval(timerInterval);
 
-  document.getElementById("timer").textContent = "0";
-  document.getElementById("revealCount").textContent = "0";
+  timerEl.textContent = "0";
+  revealCountEl.textContent = "0";
 
-  document.getElementById("menu-screen").classList.remove("active");
-  document.getElementById("game-screen").classList.add("active");
+  menuScreen.classList.remove("active");
+  gameScreen.classList.add("active");
 
   const selected = cardData.slice(0, numPairs);
   const paired = [...selected, ...selected];
@@ -151,25 +167,26 @@ function checkForMatch() {
 
   if (card1.dataset.cardId === card2.dataset.cardId) {
     matchedPairs++;
-    // 
-    if (matchedPairs === totalPairs) {
-      clearInterval(timerInterval);
 
-      // The logic trigger for visual
-      confetti({
-        particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
+    setTimeout(() => {
+      card1.classList.add("matched");
+      card2.classList.add("matched");
 
-      // --- NEW: Trigger the Medal Screen instead of alert ---
-      setTimeout(() => {
-        const modal = document.getElementById("victory-screen");
-        modal.style.display = "flex"; 
-      }, 700);
-    }
-    flippedCards = [];
-    
+      if (matchedPairs === totalPairs) {
+        clearInterval(timerInterval);
+
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 },
+        });
+
+        setTimeout(() => {
+          victoryScreen.style.display = "flex";
+        }, 500);
+      }
+      flippedCards = [];
+    }, 700);
   } else {
     setTimeout(() => {
       card1.classList.remove("flipped");
@@ -178,7 +195,3 @@ function checkForMatch() {
     }, 1000);
   }
 }
-
-
-
-

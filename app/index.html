@@ -9,14 +9,16 @@
 
   <body>
     <div id="menu-screen" class="screen active">
+  <div class="menu-card"> 
       <h1>FLIP IT</h1>
-      <p>Select a difficulty level to start:</p>
-      <div class="button-group">
-        <button onclick="initGame(3)">Beginner</button>
-        <button onclick="initGame(6)">Intermediate</button>
-        <button onclick="initGame(10)">Advanced</button>
-      </div>
+    <p>Select a difficulty level to start:</p>
+    <div class="button-group">
+      <button class="menu-btn" onclick="initGame(3)">Beginner</button>
+      <button class="menu-btn" onclick="initGame(6)">Intermediate</button>
+      <button class="menu-btn" onclick="initGame(10)">Advanced</button>
     </div>
+  </div>
+</div>
 
     <div id="game-screen" class="screen">
         <div id="game-container">
