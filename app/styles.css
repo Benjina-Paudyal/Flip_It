@@ -45,7 +45,7 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
-  max-height: 80vh;
+  max-height: 85vh;
   overflow-y: auto;
   padding-bottom: 20px;
 }
@@ -89,19 +89,30 @@ body {
   background-color: var(--button-hover-color);
 }
 
+.card {
+  width: 100%; 
+  aspect-ratio: 5 / 7; 
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+
 .cards-grid {
   display: grid;
   gap: 15px;
-  max-width: 445px; /* matched with stats-bar */
-  width: 100%;
+  width: 95%;
+  max-width: 500px; 
   margin: 0 auto;
+  justify-content: center;
 }
 
-.card {
-  width: 100px;
-  height: 120px;
-  perspective: 1000px;
-  cursor: pointer;
+
+.grid-beginner {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
+.grid-advanced {
+  grid-template-columns: repeat(4, 1fr) !important;
 }
 
 .card-inner {
@@ -149,21 +160,6 @@ body {
   font-size: 1rem;
   color: var(--main-text-color);
   font-weight: bold;
-}
-
-.grid-beginner {
-  display: grid;
-  gap: 15px;
-  grid-template-columns: repeat(3, 100px);
-  margin: 0 auto;
-}
-
-.grid-advanced {
-  display: grid;
-  gap: 15px;
-  /* grid-template-columns: repeat(4, 100px); */
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  margin: 0 auto;
 }
 
 #victory-screen {
@@ -226,7 +222,7 @@ body {
 #menu-screen h1 {
   font-size: 3rem;
   margin-bottom: 10px;
-  background: var(--page-background-color);
+  color: var(--main-text-color);
   letter-spacing: 2px;
 }
 
@@ -266,32 +262,43 @@ body {
 }
 
 
+
+
+
+
+
 @media (max-width: 500px) {
   .cards-grid {
-    padding: 0 10px; 
+    padding: 0 10px;
+    gap: 10px;
   }
 
-  .grid-advanced, 
-  .grid-beginner {
-    gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-  }
   .card {
-    width: 70px;
-    height: 84px;
+    width: 100%;
+    aspect-ratio: 5 / 7;
+  }
+
+  .grid-beginner {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .grid-advanced {
+    grid-template-columns: repeat(4, 1fr) !important;
   }
 
   .emoji {
     font-size: 2.5rem;
   }
+
   .name {
     font-size: 0.8rem;
   }
 
   .stats-bar {
-    max-width: 90%;
+    max-width: 95%;
     padding: 10px 15px;
   }
+
   .stats-bar .stat {
     font-size: 0.85rem;
   }
@@ -302,12 +309,49 @@ body {
   }
 
   .medal-content {
-    padding: 2rem;
+    padding: 1.5rem; 
+    width: 85%;    
     border-width: 3px;
   }
+  
   .medal-icon {
     font-size: 60px;
     margin: 10px 0;
   }
- 
+}
+
+
+@media (max-width: 400px) {
+  .cards-grid {
+    gap: 6px;
+    width: 98%; 
+  }
+
+  .name {
+    display: none; 
+  }
+
+  .emoji {
+    font-size: 2rem;
+  }
+
+  .stats-bar .stat {
+    font-size: 0.75rem;
+  }
+
+  #back-button {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+}
+
+
+@media (max-width: 320px) {
+  .grid-advanced {
+    grid-template-columns: repeat(3, 1fr) !important; 
+  }
+  
+  .emoji {
+    font-size: 1.8rem;
+  }
 }
