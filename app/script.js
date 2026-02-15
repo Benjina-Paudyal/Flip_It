@@ -40,8 +40,9 @@ backButton.addEventListener("click", () => {
   menuScreen.classList.add("active");
 });
 
+// Fisher-Yates algorithm
 function shuffleCards(array) {
-  const shuffled = [...array];
+  const shuffled = [...array]; // cloning the data
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
@@ -73,6 +74,7 @@ function handleCardClick(event) {
   }
 }
 
+
 function createCardFront() {
   const cardFront = document.createElement("div");
   cardFront.className = "card-front";
@@ -102,6 +104,7 @@ function createCardBack(card) {
 
   return cardBack;
 }
+
 
 function renderCards(cards) {
   const grid = document.getElementById("cardsGrid");
@@ -148,7 +151,7 @@ async function initGame(numPairs) {
   gameScreen.classList.add("active");
 
   const selected = cardData.slice(0, numPairs);
-  const paired = [...selected, ...selected];
+  const paired = [...selected, ...selected]; // duplication of crads
   const deck = shuffleCards(paired);
   renderCards(deck);
 }
